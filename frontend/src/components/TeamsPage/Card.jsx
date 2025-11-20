@@ -75,12 +75,12 @@ const Card = ({ team }) => {
                     >
                         View Team
                     </Button>
-                    {teamStatus === 'Recruiting' &&
+                    {/* {teamStatus === 'Recruiting' &&
                         // team.request
                         <Button variant="default" onClick={handleRequestToJoin} className="justify-center items-center flex-1">
                             Request to Join
                         </Button>
-                    }
+                    } */}
                 </div>
             </div>
         </div>
