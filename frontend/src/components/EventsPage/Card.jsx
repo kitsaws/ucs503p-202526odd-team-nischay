@@ -1,8 +1,10 @@
 import { Badge, Calendar, Clock, MapPin, Users } from 'lucide-react'
 import { Button } from '../ui/Button'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const Card = ({ event }) => {
+    const navigate = useNavigate();
     return (
         <div className="rounded-xl overflow-hidden hover-lift border border-border">
             <div className="h-2 bg-primary"></div>
@@ -44,7 +46,11 @@ const Card = ({ event }) => {
                     <Button variant="default" className="justify-center items-center flex-1">
                         View Details
                     </Button>
-                    <Button variant="outline" className="justify-center items-center flex-1">
+                    <Button
+                        variant="outline"
+                        className="justify-center items-center flex-1"
+                        onClick={() => navigate('/create-team')}
+                    >
                         Join Event
                     </Button>
                 </div>
