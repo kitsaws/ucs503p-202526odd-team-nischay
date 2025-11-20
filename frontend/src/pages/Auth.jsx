@@ -20,7 +20,7 @@ const Auth = () => {
 
     return (
         <div className='w-screen h-screen bg-gray-50 flex justify-center items-center'>
-            <div className='w-full px-6 md:px-0 md:w-1/4 flex flex-col gap-4 justify-center items-center'>
+            <div className='w-full px-6 md:px-0 md:w-1/4 flex flex-col gap-4 justify-center items-center -translate-y-10'>
                 <Link to={'/'}>
                     <Logo />
                 </Link>
