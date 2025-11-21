@@ -14,14 +14,14 @@ const EditProfile = () => {
   const navigate = useNavigate();
 
   const [basicInfoForm, setBasicInfoForm] = useState({
-    fullName: '',
-    email: '',
-    university: '',
-    branch: '',
-    year: '',
-    bio: '',
-    resumeUrl: '',
-    profilePic: '',
+    fullName: "",
+    email: "",
+    university: "",
+    branch: "",
+    year: "",
+    bio: "",
+    resumeUrl: "",
+    profilePic: "",
     skills: [],
     socials: {},
   });
@@ -29,18 +29,18 @@ const EditProfile = () => {
   // Initialize form values from user
   useEffect(() => {
     if (user) {
-      const filteredSocials = { ...(user.socials || {}) };
-      delete filteredSocials.email; // remove email from socials if present
+      const filteredSocials = { ...user.socials };
+      delete filteredSocials.email; // remove email from socials
 
       setBasicInfoForm({
-        fullName: user.name || '',
-        email: user.email || '',
-        university: user.university || '',
-        branch: user.branch || '',
-        year: user.year || '',
-        bio: user.bio || '',
-        resumeUrl: user.resumeUrl || '',
-        profilePic: user.profilePic || '',
+        fullName: user.name || "",
+        email: user.email || "",
+        university: user.university || "",
+        branch: user.branch || "",
+        year: user.year || "",
+        bio: user.bio || "",
+        resumeUrl: user.resumeUrl || "",
+        profilePic: user.profilePic || "",
         skills: user.skills || [],
         socials: filteredSocials || {},
       });
@@ -56,10 +56,7 @@ const EditProfile = () => {
   };
 
   const handleSkillsChange = (e) => {
-    const skillsArray = e.target.value
-      .split(',')
-      .map((s) => s.trim())
-      .filter(Boolean);
+    const skillsArray = e.target.value.split(",").map((s) => s.trim());
     setBasicInfoForm((prev) => ({
       ...prev,
       skills: skillsArray,
@@ -82,13 +79,14 @@ const EditProfile = () => {
       ...prev,
       socials: {
         ...prev.socials,
-        [newKey]: '',
+        [newKey]: "",
       },
     }));
   };
 
   const handleRemoveSocial = (key) => {
-    if (key.toLowerCase() === 'linkedin' || key.toLowerCase() === 'github') return;
+    // prevent removal of LinkedIn and GitHub
+    if (key.toLowerCase() === "linkedin" || key.toLowerCase() === "github") return;
     const updated = { ...basicInfoForm.socials };
     delete updated[key];
     setBasicInfoForm((prev) => ({
@@ -99,24 +97,22 @@ const EditProfile = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    if (!user?._id) return;
-
     try {
-      await api.put(`/user/${user._id}/update`, basicInfoForm);
-      toast.success('Profile updated successfully');
-      navigate(`/profile/${user._id}`);
+      const res = await api.put(`/user/${user._id}/update`, basicInfoForm);
+      toast.success("Profile Updated Successfully");
+      setTimeout(() => navigate(`/user/${user._id}`), 3000);
       window.location.reload();
     } catch (err) {
       console.error(err);
-      toast.error('Something went wrong while updating profile');
+      toast.error("Something went wrong while updating profile");
     }
   };
 
   const renderSocialIcon = (key) => {
     switch (key.toLowerCase()) {
-      case 'linkedin':
+      case "linkedin":
         return <Linkedin className="text-blue-600" size={18} />;
-      case 'github':
+      case "github":
         return <Github className="text-gray-800" size={18} />;
       default:
         return null;
@@ -124,8 +120,8 @@ const EditProfile = () => {
   };
 
   const prettifyKey = (key) => {
-    if (key.toLowerCase() === 'linkedin') return 'LinkedIn';
-    if (key.toLowerCase() === 'github') return 'GitHub';
+    if (key.toLowerCase() === "linkedin") return "LinkedIn";
+    if (key.toLowerCase() === "github") return "GitHub";
     return key.charAt(0).toUpperCase() + key.slice(1);
   };
 

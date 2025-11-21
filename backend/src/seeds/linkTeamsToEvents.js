@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const Team = require('../models/Team');
 const Event = require('../models/Event');
 
-const MONGO_URI = 'mongodb://localhost:27017/SquadUp';
+const MONGO_URI = process.env.MONGO_URI;
 
 (async () => {
   try {
