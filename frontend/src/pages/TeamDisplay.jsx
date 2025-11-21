@@ -2,7 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Layout from '../layouts/Layout';
 import { useEffect, useState } from 'react';
 import api from '../services/api';
-import { Users, Github, Linkedin, Mail } from 'lucide-react';
+import { Users, Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { Button } from '../components/ui/Button';
 import Avatar from '../components/ui/Avatar';
@@ -122,6 +122,14 @@ const TeamDisplay = () => {
                               Leader
                             </p>
                           )}
+                          <Button
+                            variant={'outline'}
+                            onClick={() => navigate(`/profile/${member._id}`)}
+                            className={'p-1'}
+                            size={'sm'}
+                          >
+                            <ExternalLink size={20} />
+                          </Button>
                         </span>
 
                         {member.bio && (

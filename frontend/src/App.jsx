@@ -21,8 +21,7 @@ function App() {
       </div>
     )
   }
-  if (!user) <Navigate to='/login' replace />
-
+  
   return (
     <>
       <AppRoutes />

@@ -65,7 +65,7 @@ const EventDisplay = () => {
                                 </div>
                                 <Button
                                     variant={'outline'}
-                                    onClick={() => navigate(`/`)} //navigate to the actual link
+                                    onClick={() => window.open(event.registrationLink, "_blank")}
                                     className={'p-1'}
                                     size={'sm'}
                                 >
@@ -86,23 +86,25 @@ const EventDisplay = () => {
 
                         <div className="rounded-2xl border border-border bg-background/60 p-5 md:p-6 flex flex-col gap-4">
                             <h3 className="text-lg md:text-2xl font-bold">Listed Teams</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {event.teams.map((team) => (
-                                    <Card key={team._id} team={team} />
-                                ))}
-                            </div>
+                            {event.teams.length == 0 ? (<p className='text-muted-foreground'>No teams listed yet...</p>) :
+                                (<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {event.teams.map((team) => (
+                                        <Card key={team._id} team={team} />
+                                    ))}
+                                </div>)
+                            }
                         </div>
                     </div>
 
                     {/* RIGHT SIDE: Leader panel / Join panel */}
                     <div className="right-div-leader w-full lg:flex-1 rounded-2xl border border-border bg-background/60 p-5 md:p-6 h-fit flex flex-col gap-4">
-                    <p className='text-2xl font-bold text-center'>Interested?</p>
+                        <p className='text-2xl font-bold text-center'>Interested?</p>
                         <Button
                             variant="default"
                             className="w-full sm:w-auto justify-center"
-                            onClick={() => navigate(``)}
+                            onClick={() => window.open(event.registrationLink, "_blank")}
                         >
-                            <ExternalLink size={20}/>
+                            <ExternalLink size={20} />
                             Go to Event
                         </Button>
                         <Button
@@ -110,7 +112,7 @@ const EventDisplay = () => {
                             className="w-full sm:w-auto justify-center"
                             onClick={() => navigate(`/create-team`)}
                         >
-                            <Users size={20}/>
+                            <Users size={20} />
                             Form a Team
                         </Button>
                     </div>
